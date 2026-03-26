@@ -179,13 +179,19 @@ router.post('/stream', upload.array('images', 5), async (req, res) => {
     res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
   };
 
+  const keepalive = setInterval(() => {
+    res.write(': keepalive\n\n');
+  }, 15000);
+
   try {
     const { project_id, requirement, url } = req.body;
     if (!project_id) {
+      clearInterval(keepalive);
       sendEvent('error', { error: 'Project ID is required' });
       return res.end();
     }
     if (!requirement || !requirement.trim()) {
+      clearInterval(keepalive);
       sendEvent('error', { error: 'Requirement text is required' });
       return res.end();
     }
@@ -237,6 +243,7 @@ router.post('/stream', upload.array('images', 5), async (req, res) => {
     const testRun = db.prepare('SELECT * FROM test_runs WHERE id = ?').get(testRunId);
     const testCases = db.prepare('SELECT * FROM test_cases WHERE test_run_id = ?').all(testRunId);
 
+    clearInterval(keepalive);
     sendEvent('complete', {
       ...testRun,
       testCases,
@@ -249,6 +256,7 @@ router.post('/stream', upload.array('images', 5), async (req, res) => {
     });
     res.end();
   } catch (error) {
+    clearInterval(keepalive);
     console.error('Error creating test run (stream):', error);
     sendEvent('error', { error: 'Failed to create test run' });
     res.end();

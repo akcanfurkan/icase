@@ -102,9 +102,14 @@ router.post('/generate-stream', upload.array('images', 5), async (req, res) => {
     res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
   };
 
+  const keepalive = setInterval(() => {
+    res.write(': keepalive\n\n');
+  }, 15000);
+
   try {
     const { requirement, platform, url } = req.body;
     if (!requirement || !requirement.trim()) {
+      clearInterval(keepalive);
       sendEvent('error', { error: 'Gereksinim metni zorunludur' });
       return res.end();
     }
@@ -120,9 +125,11 @@ router.post('/generate-stream', upload.array('images', 5), async (req, res) => {
       },
     });
 
+    clearInterval(keepalive);
     sendEvent('complete', result);
     res.end();
   } catch (error) {
+    clearInterval(keepalive);
     console.error('Error generating test cases (stream):', error);
     sendEvent('error', { error: error.message || 'Test vakası üretimi başarısız' });
     res.end();

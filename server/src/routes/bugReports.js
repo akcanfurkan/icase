@@ -142,9 +142,14 @@ router.post('/generate-stream', upload.array('images', 5), async (req, res) => {
     res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
   };
 
+  const keepalive = setInterval(() => {
+    res.write(': keepalive\n\n');
+  }, 15000);
+
   try {
     const { error_description } = req.body;
     if (!error_description || !error_description.trim()) {
+      clearInterval(keepalive);
       sendEvent('error', { error: 'Error description is required' });
       return res.end();
     }
@@ -171,8 +176,10 @@ router.post('/generate-stream', upload.array('images', 5), async (req, res) => {
       sendEvent('progress', { step: 'ai', status: 'done', timeMs: 0 });
       sendEvent('complete', report);
     }
+    clearInterval(keepalive);
     res.end();
   } catch (error) {
+    clearInterval(keepalive);
     console.error('Error generating bug report (stream):', error);
     sendEvent('error', { error: error.message || 'Failed to generate bug report' });
     res.end();
