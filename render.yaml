@@ -3,7 +3,7 @@ services:
     name: icase
     runtime: node
     plan: free
-    buildCommand: NODE_ENV=development npm run install:all && cd server && npx playwright install chromium --with-deps 2>/dev/null; cd .. && npm run build
+    buildCommand: npm run install:all && cd server && npx playwright install chromium --with-deps 2>/dev/null; cd .. && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
