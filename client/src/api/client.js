@@ -108,6 +108,7 @@ async function streamRequest(url, formData, onProgress) {
   const decoder = new TextDecoder();
   let buffer = '';
   let result = null;
+  let eventType = null;
 
   while (true) {
     const { done, value } = await reader.read();
@@ -117,7 +118,6 @@ async function streamRequest(url, formData, onProgress) {
     const lines = buffer.split('\n');
     buffer = lines.pop() || '';
 
-    let eventType = null;
     for (const line of lines) {
       if (line.startsWith('event: ')) {
         eventType = line.slice(7).trim();
