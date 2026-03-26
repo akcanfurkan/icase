@@ -180,8 +180,8 @@ router.post('/stream', upload.array('images', 5), async (req, res) => {
   };
 
   const keepalive = setInterval(() => {
-    res.write(': keepalive\n\n');
-  }, 15000);
+    try { sendEvent('progress', { step: 'ai', status: 'running' }); } catch {}
+  }, 10000);
 
   try {
     const { project_id, requirement, url } = req.body;
