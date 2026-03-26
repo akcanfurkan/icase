@@ -1,0 +1,41 @@
+export default function ICaseLogo({ size = 32 }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 32 32"
+      width={size}
+      height={size}
+    >
+      <rect width="32" height="32" rx="6" fill="#6366f1" />
+      <path
+        d="M15.5 7 C12.5 7, 9.5 9, 8.5 12 C7.5 15, 8 17.5, 9.5 19.5 C8.5 21, 8.5 23, 10 24.5 C11.5 26, 13.5 25.5, 15.5 24"
+        fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round"
+      />
+      <path
+        d="M11 13.5 Q13 14.5, 15 13"
+        fill="none" stroke="#fff" strokeWidth="1" strokeLinecap="round" opacity="0.6"
+      />
+      <path
+        d="M9.8 18 Q12.5 19, 15 17.5"
+        fill="none" stroke="#fff" strokeWidth="1" strokeLinecap="round" opacity="0.6"
+      />
+      <path
+        d="M16.5 7 C19.5 7, 22.5 9, 23.5 12 C24.5 15, 24 17.5, 22.5 19.5 C23.5 21, 23.5 23, 22 24.5 C20.5 26, 18.5 25.5, 16.5 24"
+        fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round"
+      />
+      <circle cx="19" cy="11" r="1.1" fill="#67e8f9" />
+      <circle cx="21.5" cy="14.5" r="1.1" fill="#67e8f9" />
+      <circle cx="20" cy="18.5" r="1.1" fill="#67e8f9" />
+      <circle cx="18.5" cy="22" r="1.1" fill="#67e8f9" />
+      <line x1="19" y1="11" x2="21.5" y2="14.5" stroke="#67e8f9" strokeWidth="0.9" />
+      <line x1="21.5" y1="14.5" x2="20" y2="18.5" stroke="#67e8f9" strokeWidth="0.9" />
+      <line x1="20" y1="18.5" x2="18.5" y2="22" stroke="#67e8f9" strokeWidth="0.9" />
+      <line x1="16" y1="8" x2="16" y2="23.5" stroke="#fff" strokeWidth="0.7" opacity="0.35" />
+      <circle cx="25.5" cy="25.5" r="4.5" fill="#10b981" />
+      <path
+        d="M23.5 25.5 L25 27 L28 23.5"
+        fill="none" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

@@ -1,0 +1,22 @@
+{
+  "name": "icase-server",
+  "version": "1.0.0",
+  "description": "iCase Server",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^11.7.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.4",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^1.4.5-lts.1",
+    "playwright": "^1.58.2",
+    "xlsx": "^0.18.5"
+  }
+}
